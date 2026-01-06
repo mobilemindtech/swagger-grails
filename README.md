@@ -1,25 +1,28 @@
 # swagger-grails
 
-Generate Swagger documentation for your **Grails 5+** app.
+Generate Swagger documentation for your **Grails 7+** app.
 
 ## Built With
 
-* Java 11
-* Grails 5.2.0
-* Swagger Core 1.6.6
+* Java 24
+* Grails 7
+* Swagger Core V3 2.2.22
 
 ## Installation
 
 Add this line to the `repositories` block in your `build.gradle` file:
 
 ```groovy
-maven { url "https://steamcleaner.jfrog.io/artifactory/grails-plugins" }
+maven { url 'https://raw.githubusercontent.com/mobilemindtech/m2/master' }
 ```
 
 Add this line to the `dependencies` block in your `build.gradle` file:
 
 ```groovy
-implementation "org.grails.plugins:swagger-grails:0.5.0"
+    implementation 'org.apache.grails:swagger-grails:0.6.0'
+    implementation 'org.apache.grails:swagger-grails-ast:0.6.0'
+    implementation "io.swagger.core.v3:swagger-annotations-jakarta:2.2.22"
+
 ```
 
 ## Usage
@@ -81,35 +84,65 @@ responses, authorizations, etc.
 
 ## Configuration
 
-The plugin also exposes the ability to customize the Swagger instance that is used.
+```yaml
+swagger:
+  requireAnnotations: true # process only controller with annotations
+  info:
+    title: My api test
+    version: 0.1.1
+    description: Server api test
+  server:
+    uri: https://myservice.test.com/api
+  security:
+    apiKey:
+      enabled: true
+      name: apiKey
+      global: false
+      types:
+        - header
+        - query
+        - cookie
+    bearer:
+      enabled: true
+      name: bearerAuth
+      global: false
+    basic:
+      enabled: true
+      name: basicAuth
+      global: false 
+```
 
-The following __resources.groovy__ will create the default swagger instance that the plugin will use. It also sets the
-security definition and security block. Together these two allow a header "apiKey"
-to be attached to all calls from the front end.
+Override openApi bean
 
 ```groovy
-swagger(Swagger) {
-    securityDefinitions = ["apiKey": new ApiKeyAuthDefinition("apiKey", In.HEADER)]
-    security = [new SecurityRequirement().requirement("apiKey")]
+openApi(OpenAPI) { bean ->
+    servers = [new Server().url("https://myserver.io/api").description("My Server API")]
+    SecurityScheme apiKeyScheme = new SecurityScheme()
+            .type(SecurityScheme.Type.HTTP)
+            .name("bearer")
+            .bearerFormat("JWT")
+            .scheme("bearer")
+            .in(SecurityScheme.In.HEADER)
+            .description("Bearer auth")
+    components = new Components().addSecuritySchemes("bearer", apiKeyScheme)
+    security = [new SecurityRequirement().addList("bearer")]
+    info = new Info().title("My API title").version("0.5")
+    openapi = "3.0.1"
 }
 ```
 
-Any of the fields on the Swagger object can be configured this way as well. For some more info on what can be configured
-the [OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schema) describes
-what the Swagger object can contain.
 
 ## Running the plugin locally
 
-The plugin source contains more examples of what types of configuration you can apply to controllers and actions :
 
 ##### Prerequisites
 
-* Java 11
-* Grails 5.2.0
+* Java 24
+* Grails 7
 
 ##### Running
 
 * Clone or download the repo
-* Run `grails run-app`
-* Navigate to `http://localhost:8080/`
+* Run `./gradlew grails-swagger-example`
+* Navigate to `http://localhost:8080/swagger`
 

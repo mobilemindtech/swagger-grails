@@ -1,0 +1,23 @@
+<plugin name='swagger' version='0.6.0' grailsVersion='5.0.0 &gt; *'>
+  <type>swagger.grails.SwaggerGrailsPlugin</type>
+  <authorEmail></authorEmail>
+  <author>steamcleaner</author>
+  <watchedResources>[file:./grails-app/controllers/**/*.groovy]</watchedResources>
+  <documentation>https://github.com/steamcleaner/swagger-grails</documentation>
+  <profiles>[web]</profiles>
+  <description>Grails 5.x.x plugin that will generate and display Swagger documentation.</description>
+  <title>swagger-grails</title>
+  <version />
+  <grailsVersion>5.0.0 &gt; *</grailsVersion>
+  <license>APACHE</license>
+  <pluginExcludes>[grails-app/views/error.gsp, grails-app/views/notFound.gsp, grails-app/conf/logback-test.groovy, **/test/**]</pluginExcludes>
+  <name>swagger</name>
+  <scm url='https://github.com/steamcleaner/swagger-grails' />
+  <resources>
+    <resource>swagger.grails.SwaggerController</resource>
+    <resource>swagger.grails.UrlMappings</resource>
+    <resource>swagger.grails.Application</resource>
+    <resource>swagger.grails.BootStrap</resource>
+    <resource>swagger.grails.SwaggerService</resource>
+  </resources>
+</plugin>

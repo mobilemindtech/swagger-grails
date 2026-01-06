@@ -1,0 +1,86 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url = 'https://repo.grails.org/grails/restricted'
+        }
+    }
+    dependencies { // Not Published to Gradle Plugin Portal
+        classpath platform("org.apache.grails:grails-bom:$grailsVersion")
+        classpath "org.apache.grails:grails-data-hibernate5"
+        classpath "org.apache.grails:grails-gradle-plugins"
+    }
+}
+
+plugins {
+    id "war"
+    id "idea"
+    id "eclipse"
+    id 'maven-publish'
+    id 'java-library'
+}
+
+// Not Published to Gradle Plugin Portal
+apply plugin: "org.apache.grails.gradle.grails-plugin"
+
+version "0.6.0"
+group "org.apache.grails"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url = 'https://repo.grails.org/grails/restricted'
+    }
+}
+
+dependencies {
+
+    profile "org.apache.grails.profiles:plugin"
+    implementation platform("org.apache.grails:grails-bom:$grailsVersion")
+    implementation "org.apache.grails:grails-cache"
+    implementation "org.apache.grails:grails-core"
+    implementation "org.apache.grails:grails-data-hibernate5"
+    implementation "org.apache.grails:grails-databinding"
+    implementation "org.apache.grails:grails-events"
+    implementation "org.apache.grails:grails-interceptors"
+    implementation "org.apache.grails:grails-logging"
+    implementation "org.apache.grails:grails-rest-transforms"
+    implementation "org.apache.grails:grails-services"
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation "org.springframework.boot:spring-boot-starter-logging"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    console "org.apache.grails:grails-console"
+    testImplementation "org.apache.grails:grails-testing-support-datamapping"
+    testImplementation "org.apache.grails:grails-testing-support-web"
+    testImplementation "org.spockframework:spock-core"
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation "org.spockframework:spock-core"
+
+    // Paranamer atualizado para melhor suporte a reflexão no Java moderno
+    implementation "com.thoughtworks.paranamer:paranamer:2.8"
+
+    // Swagger Core V3 com suporte a Jakarta EE
+    implementation "io.swagger.core.v3:swagger-core-jakarta:2.2.22"
+    implementation "io.swagger.core.v3:swagger-annotations-jakarta:2.2.22"
+    implementation "io.swagger.core.v3:swagger-models-jakarta:2.2.22"
+    implementation "io.swagger.core.v3:swagger-jaxrs2-jakarta:2.2.22"
+    implementation "jakarta.ws.rs:jakarta.ws.rs-api:3.1.0"
+
+    implementation project(":swagger-grails-ast")
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+
+compileJava.options.release = 17
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
