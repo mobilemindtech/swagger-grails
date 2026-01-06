@@ -97,7 +97,7 @@ swagger:
     apiKey:
       enabled: true
       name: apiKey
-      global: false
+      global: false # apply all routes
       types:
         - header
         - query
@@ -109,7 +109,7 @@ swagger:
     basic:
       enabled: true
       name: basicAuth
-      global: false 
+      global: false
 ```
 
 Override openApi bean
