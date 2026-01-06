@@ -19,7 +19,7 @@ class SwaggerController {
         <head>
             <meta charset="UTF-8">
             <title>Swagger UI</title>
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui.css" >
+            <link rel="stylesheet" type="text/css" href="/swagger/assets/swagger-ui.css" >
             <style>
               html { box-sizing: border-box; overflow-y: scroll; }
               *, *:before, *:after { box-sizing: inherit; }
@@ -28,8 +28,8 @@ class SwaggerController {
         </head>
         <body>
             <div id="swagger-ui"></div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-bundle.js"> </script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui-standalone-preset.js"> </script>            
+            <script src="/swagger/assets/swagger-ui-bundle.js"> </script>
+            <script src="/swagger/assets/swagger-ui-standalone-preset.js"> </script>            
             <script>
             window.onload = function() {
               const ui = SwaggerUIBundle({
@@ -62,5 +62,23 @@ class SwaggerController {
     def internal() {
         header("Access-Control-Allow-Origin", request.getHeader('Origin'))
         render(status: 200, contentType: "application/json", text: Json.mapper().writeValueAsString(SwaggerApi.apis))
+    }
+
+    def assets(){
+        String file = request.requestURL.toString().split("/").last()
+
+        if(!file.endsWith('.css') && !file.endsWith('.js')) {
+            render status: 404
+            return
+        }
+
+        def ctype = file.endsWith('.css') ? 'text/css' : 'application/javascript'
+        def is = this.class.classLoader.getResourceAsStream("swagger-ui/${file}")
+
+        if (is) {
+            render file: is.bytes, contentType: ctype
+        } else {
+            render status: 404
+        }
     }
 }

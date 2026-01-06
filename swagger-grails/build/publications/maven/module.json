@@ -27,11 +27,11 @@
         {
           "name": "swagger-grails-0.6.0.jar",
           "url": "swagger-grails-0.6.0.jar",
-          "size": 141734,
-          "sha512": "f0709b6ada37b1c1c7e2b255662d2caf61a7037f7596e8184aca3c9dbe1e829e2641cf68681d74f2a8048c5b1ec7340a046822bfbaf218c5b088e33b349652e1",
-          "sha256": "43e71992e9eb8d7376dae1a53ee021a4e86cd83ba6953fa86ba4358dcd0d8278",
-          "sha1": "2e6f2479f1e8b51d768441017cba3d1590842a4d",
-          "md5": "c1408814c147609eb2422adf069ebdbc"
+          "size": 641960,
+          "sha512": "d0e94dd0e67b9db5e40805f96ac493cb7c6d6e2d0cdbb0034cecd32b16fb79c31c9acb4c55ff5d4c7cd5141544e20800d3416c074697680c31001c2ae36239c6",
+          "sha256": "92b193c68ff6f9a46aa1863cda74f800b97b76cc8e27dd2959baf89c11c93075",
+          "sha1": "e60c832b3ad028106cf9cc2671dd460f4dfa2dfb",
+          "md5": "927686f93a495e7b03e1b04a999a2bbd"
         }
       ]
     },
@@ -278,11 +278,11 @@
         {
           "name": "swagger-grails-0.6.0.jar",
           "url": "swagger-grails-0.6.0.jar",
-          "size": 141734,
-          "sha512": "f0709b6ada37b1c1c7e2b255662d2caf61a7037f7596e8184aca3c9dbe1e829e2641cf68681d74f2a8048c5b1ec7340a046822bfbaf218c5b088e33b349652e1",
-          "sha256": "43e71992e9eb8d7376dae1a53ee021a4e86cd83ba6953fa86ba4358dcd0d8278",
-          "sha1": "2e6f2479f1e8b51d768441017cba3d1590842a4d",
-          "md5": "c1408814c147609eb2422adf069ebdbc"
+          "size": 641960,
+          "sha512": "d0e94dd0e67b9db5e40805f96ac493cb7c6d6e2d0cdbb0034cecd32b16fb79c31c9acb4c55ff5d4c7cd5141544e20800d3416c074697680c31001c2ae36239c6",
+          "sha256": "92b193c68ff6f9a46aa1863cda74f800b97b76cc8e27dd2959baf89c11c93075",
+          "sha1": "e60c832b3ad028106cf9cc2671dd460f4dfa2dfb",
+          "md5": "927686f93a495e7b03e1b04a999a2bbd"
         }
       ]
     }
